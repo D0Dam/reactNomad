@@ -12,9 +12,10 @@
 	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 	<script type="text/babel">
 		const root = document.getElementById("root");
-		function Btn({ btnText, changeBtnText }) {
+		function Btn({ btnText, changeBtnText, fontSize = 14 }) {
 			return (
 				<button
 					onClick={changeBtnText}
@@ -24,12 +25,17 @@
 						padding: "10px 20px",
 						border: 0,
 						borderRadius: 10,
+						fontSize,
 					}}
 				>
 					{btnText}
 				</button>
 			);
 		}
+		Btn.propTypes = {
+			text: PropTypes.string.isRequired,
+			fontSize: PropTypes.umber,
+		};
 		const App = () => {
 			const [val, setVal] = React.useState("Save Changes");
 			const [save, setSave] = React.useState(true);
@@ -44,7 +50,7 @@
 			};
 			return (
 				<div>
-					<Btn btnText={val} changeBtnText={changeBtnText} />
+					<Btn btnText={val} changeBtnText={changeBtnText} fontSize={18} />
 					<Btn btnText="Continue" />
 				</div>
 			);
