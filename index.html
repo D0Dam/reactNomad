@@ -14,16 +14,16 @@
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 	<script type="text/babel">
 		const root = document.getElementById("root");
-		function Btn({ btnText, big }) {
+		function Btn({ btnText, changeBtnText }) {
 			return (
 				<button
+					onClick={changeBtnText}
 					style={{
 						backgroundColor: "tomato",
 						color: "white",
 						padding: "10px 20px",
 						border: 0,
 						borderRadius: 10,
-						fontSize: big ? 18 : 12,
 					}}
 				>
 					{btnText}
@@ -31,10 +31,21 @@
 			);
 		}
 		const App = () => {
+			const [val, setVal] = React.useState("Save Changes");
+			const [save, setSave] = React.useState(true);
+			const changeBtnText = () => {
+				if (save) {
+					setVal("Revert Changes");
+					setSave(false);
+				} else {
+					setVal("Save Changes");
+					setSave(true);
+				}
+			};
 			return (
 				<div>
-					<Btn btnText="Save Changes" big={true} />
-					<Btn btnText="Continue" big={false} />
+					<Btn btnText={val} changeBtnText={changeBtnText} />
+					<Btn btnText="Continue" />
 				</div>
 			);
 		};
