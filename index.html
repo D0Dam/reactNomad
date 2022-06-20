@@ -14,101 +14,27 @@
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 	<script type="text/babel">
 		const root = document.getElementById("root");
-		const MtoH = () => {
-			const [amount, setAmount] = React.useState(0);
-			const [flip, setFlip] = React.useState(false);
-			const onChange = (e) => {
-				setAmount(e.target.value);
-			};
-			const reset = () => {
-				setAmount(0);
-			};
-			const onFlip = () => {
-				reset();
-				setFlip((cur) => !cur);
-			};
+		function Btn({ btnText, big }) {
 			return (
-				<div>
-					<label htmlFor="Minutes">Minutes</label>
-					<input
-						id="Minutes"
-						placeHolder="Minutes"
-						type="number"
-						value={flip ? amount * 60 : amount}
-						onChange={onChange}
-						disabled={flip === true}
-					></input>
-					<label htmlFor="Hour">Hour</label>
-					<input
-						id="Hour"
-						placeHolder="Hour"
-						type="number"
-						value={flip ? amount : amount / 60}
-						onChange={onChange}
-						disabled={flip === false}
-					></input>
-					<button onClick={reset}>reset</button>
-					<button onClick={onFlip}>flipped</button>
-				</div>
+				<button
+					style={{
+						backgroundColor: "tomato",
+						color: "white",
+						padding: "10px 20px",
+						border: 0,
+						borderRadius: 10,
+						fontSize: big ? 18 : 12,
+					}}
+				>
+					{btnText}
+				</button>
 			);
-		};
-		const KmtoM = () => {
-			const [amount, setAmount] = React.useState(0);
-			const [flip, setFlip] = React.useState(false);
-			const onChange = (e) => {
-				setAmount(e.target.value);
-			};
-			const reset = () => {
-				setAmount(0);
-			};
-			const onFlip = () => {
-				reset();
-				setFlip((cur) => !cur);
-			};
-			return (
-				<div>
-					<label htmlFor="Kmeter">Kmeter</label>
-					<input
-						id="Kmeter"
-						placeHolder="Kmeter"
-						type="number"
-						value={flip ? amount * 0.001 : amount}
-						onChange={onChange}
-						disabled={flip === true}
-					></input>
-					<label htmlFor="Meter">Meter</label>
-					<input
-						id="Meter"
-						placeHolder="Meter"
-						type="number"
-						value={flip ? amount : amount * 1000}
-						onChange={onChange}
-						disabled={flip === false}
-					></input>
-					<button onClick={reset}>reset</button>
-					<button onClick={onFlip}>flipped</button>
-				</div>
-			);
-		};
-		const Title = () => {
-			return <div>converter가 아직 선택되지 않았습니다.</div>;
-		};
+		}
 		const App = () => {
-			const [index, setIndex] = React.useState("first");
-			const onSelect = (event) => {
-				setIndex(event.target.value);
-			};
 			return (
 				<div>
-					<h1>Super Converters</h1>
-					<select value={index} onChange={onSelect}>
-						<option value="first">converter를 선택하세요</option>
-						<option value="0">시 분 변환</option>
-						<option value="1">km, m 변환</option>
-					</select>
-					{index === "first" ? <Title /> : null}
-					{index === "0" ? <MtoH /> : null}
-					{index === "1" ? <KmtoM /> : null}
+					<Btn btnText="Save Changes" big={true} />
+					<Btn btnText="Continue" big={false} />
 				</div>
 			);
 		};
